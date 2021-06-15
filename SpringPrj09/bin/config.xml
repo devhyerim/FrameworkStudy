@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- CalculatorImpl 클래스(주업무)의 객체 생성을 위한 정보 전달 -->
+	<bean id="cal" class="com.test.spr.CalculatorImpl"></bean>
+	
+	<!-- CalculatorAspect(보조업무)의 객체 생성을 위한 정보 전달 -->
+	<bean id="aspect" class="com.test.spr.CalculatorAspect"></bean>
+	
+	<!-- CalculatorBeforeAdvice 클래스의 객체 생성을 위한 정보 전달 -->
+	<bean id="before" class="com.test.spr.CalculatorBeforeAdvice"></bean>
+	
+	<!-- CalculatorAfterThrowing 클래스의 객체 생성을 위한 정보 전달 -->
+	<bean id="afterThrowing" class="com.test.spr.CalculatorAfterThrowing"></bean>
+	
+	<!-- check~!! -->
+	<!-- 'ProxyFactoryBean' -->
+	<!-- 스프링이 제공하는 가짜 객체(Proxy) 클래스의 객체 생성을 위한 정보 전달 -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		
+		<!-- 주 업무 클래스의 인터페이스 정보 제공 -->
+		<!-- → 'proxyInterfaces' -->
+		<property name="proxyInterfaces">
+			<list>
+				<value>com.test.spr.Calculator</value>
+			</list>
+		</property>
+		
+		<!-- 주 업무 클래스의 객체 정보 제공 -->
+		<!-- → 'target' -->
+		<property name="target" ref="cal"></property>
+		
+		<!-- 보조 업무 클래스의 객체 정보 제공 -->
+		<!-- → 'InterceptorNames' -->
+		<property name="InterceptorNames">
+			<list>
+				<!-- Around Advice -->
+				<value>aspect</value>
+				
+				<!-- Before Advice -->
+				<value>before</value>
+				
+				<!-- After Adivce -->
+				<value>afterThrowing</value>
+			</list>
+		</property>
+	
+	</bean>
+
+</beans>
