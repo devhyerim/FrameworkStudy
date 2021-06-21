@@ -1,5 +1,5 @@
 /*========================================================
-    #08. EmployeeDAO.java
+    #09. EmployeeDAO.java
     - 데이터베이스 액션 처리 클래스
     - 직원 데이터 입력/출력/수정/삭제 액션
       Connection 객체에 대한 의존성 주입 위한 대비
@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
+
 
 public class EmployeeDAO implements IEmployeeDAO
 {
@@ -48,7 +49,12 @@ public class EmployeeDAO implements IEmployeeDAO
 		while(rs.next())
 		{
 			Employee emp = new Employee();
-			emp.setEmployeeId(rs.getString("EMPLOYEEID"));
+			//emp.setEmployeeId(rs.getString("EMPLOYEEID"));
+			//-- ※ DB에서 employeeId는 NUMBER 속성이지만
+			//      DTO의 속성은 String이다.
+			//      따라서 이걸 getString으로 받으면 나중에 출력 시 NumberFormatException이 발생한다.
+			//      즉, int로 받아 String으로 형변환 시켜줘야 한다.
+			emp.setEmployeeId(Integer.toString(rs.getInt("EMPLOYEEID")));
 			emp.setName(rs.getString("NAME"));
 			emp.setSsn(rs.getString("SSN"));
 			emp.setBirthday(rs.getString("BIRTHDAY"));
