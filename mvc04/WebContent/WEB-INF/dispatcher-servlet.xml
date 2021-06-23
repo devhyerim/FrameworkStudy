@@ -69,8 +69,27 @@
 		<property name="dao" ref="employeeDAO"></property>
 	</bean>
 	
-	<!-- 6. EmployeeInsert(직원 등록) Controller 등록-->
+	<!-- 6. EmployeeInsert(직원 등록) Controller 등록 -->
 	<bean name="/employeeinsert.action" class="com.test.mvc.EmployeeInsertController">
 		<property name="dao" ref="employeeDAO"></property>
 	</bean>
+	
+	<!-- 7. EmployeeUpdate(직원 수정) Controller 등록 -->
+	<bean name="/employeeupdateform.action" class="com.test.mvc.EmployeeUpdateFormController">
+		<property name="employeeDAO" ref="employeeDAO"></property>
+		<property name="regionDAO" ref="regionDAO"></property>
+		<property name="departmentDAO" ref="departmentDAO"></property>
+		<property name="positionDAO" ref="positionDAO"></property>
+	</bean>
+	
+	<!-- 8. EmployeeUpdate(직원 수정 액션 수행) Controller 등록 -->
+	<bean name="/employeeupdate.action" class="com.test.mvc.EmployeeUpdateController">
+		<property name="dao" ref="employeeDAO"></property>
+	</bean>
+	
+	<!-- 9. EmployeeDelete(직원 삭제 액션 수행) Controller 등록 -->
+	<bean name="/employeedelete.action" class="com.test.mvc.EmployeeDeleteController">
+		<property name="dao" ref="employeeDAO"></property>
+	</bean>
+	
 </beans>

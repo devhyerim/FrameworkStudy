@@ -11,6 +11,37 @@
 <meta charset="UTF-8">
 <title>EmployeeList.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/main.css" />
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(function()
+	{
+		$(".updateBtn").click(function()
+		{
+			// 테스트
+			//alert("수정 버튼 클릭");
+			// employeeupdateform.action 페이지를 요청하면서
+			// 데이터를 넘겨준다
+			// employeeId를 controller에게 넘겨주면
+			// controller가 employeeId를 가지고 해당 객체의 정보를 전달한다.
+			// (dao의 serachId(employeeId) 메소드 호출)
+			$(location).attr("href", "employeeupdateform.action?employeeId=" + $(this).val());
+		});
+		
+		$(".deleteBtn").click(function()
+		{
+			// 테스트
+			//alert("삭제 버튼 클릭");
+			if(confirm("현재 선택한 데이터를 정말 삭제하시겠습니까?"))
+			{
+				$(location).attr("href", "employeedelete.action?employeeId=" +  $(this).val());
+			}
+		});
+	});
+
+</script>
+
 </head>
 <body>
 <!------------------------------------------------
@@ -93,8 +124,10 @@
 					groupingUsed="true"></fmt:formatNumber>
 				</td>
 				<td>${employee.grade==0 ? "관리자" : "일반직원" }</td>
-				<td><button type="button" class="btn">수정</button></td>
-				<td><button type="button" class="btn">삭제</button></td>
+				<td><button type="button" class="updateBtn"
+				value="${employee.employeeId }">수정</button></td>
+				<td><button type="button" class="deleteBtn"
+				value="${employee.employeeId }">삭제</button></td>
 			</tr>
 			</c:forEach>
 		</table>

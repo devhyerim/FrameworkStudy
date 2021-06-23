@@ -54,6 +54,7 @@ public class EmployeeDAO implements IEmployeeDAO
 			//      DTO의 속성은 String이다.
 			//      따라서 이걸 getString으로 받으면 나중에 출력 시 NumberFormatException이 발생한다.
 			//      즉, int로 받아 String으로 형변환 시켜줘야 한다.
+			
 			emp.setEmployeeId(Integer.toString(rs.getInt("EMPLOYEEID")));
 			emp.setName(rs.getString("NAME"));
 			emp.setSsn(rs.getString("SSN"));
@@ -322,12 +323,11 @@ public class EmployeeDAO implements IEmployeeDAO
 		*/
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, Integer.parseInt(employeeId));
-		
+		pstmt.setString(1, employeeId);
 		ResultSet rs = pstmt.executeQuery();
 		
 		while(rs.next())
-		{
+		{			
 			emp.setEmployeeId(rs.getString("EMPLOYEEID"));
 			emp.setName(rs.getString("NAME"));
 			emp.setSsn1(rs.getString("SSN1"));
