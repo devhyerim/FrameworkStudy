@@ -42,11 +42,13 @@ public class DepartmentUpdateController implements Controller
 		}
 		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		
+		String departmentId = request.getParameter("departmentId");
 		String departmentName = request.getParameter("departmentName");
 		
 		try
 		{
 			Department department = new Department();
+			department.setDepartmentId(departmentId);
 			department.setDepartmentName(departmentName);
 			
 			dao.modify(department);

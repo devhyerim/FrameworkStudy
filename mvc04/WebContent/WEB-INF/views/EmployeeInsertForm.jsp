@@ -117,7 +117,7 @@
 	</div>
 	
 	<!-- 콘텐츠 영역 -->
-	<div id="content" method="post" id="employeeForm">
+	<div id="content">
 		<h1>[ 직원 추가 ]</h1>
 		<hr>
 		

@@ -1,13 +1,10 @@
 /*==================================
-   DepartmentUpdateFormController.java
+   DepartmentDeleteController.java
    - 사용자 정의 컨트롤러 클래스
-   - 사용자가 부서를 수정할 수 있는 화면으로 이동
-   - 저장되어 있는 부서 정보를 가지고 뷰 화면으로 이동
+   - 부서 삭제 액션 처리 클래스
 ===================================*/
 
 package com.test.mvc;
-
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 
-public class DepartmentUpdateFormController implements Controller
+public class DepartmentDeleteController implements Controller
 {
 	private IDepartmentDAO dao;
 	
@@ -25,15 +22,16 @@ public class DepartmentUpdateFormController implements Controller
 	{
 		this.dao = dao;
 	}
-	
+
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		ModelAndView mav = new ModelAndView();
 		
-		// 세션 처리과정 추가 (관리자만 접근) -----------------------------------------------------
-		HttpSession session = request.getSession();
+		// 세션 확인 처리 ----------------------------------------
 		
+		HttpSession session = request.getSession();
+				
 		if(session.getAttribute("name")==null)
 		{
 			mav.setViewName("redirect:loginform.action");
@@ -43,20 +41,17 @@ public class DepartmentUpdateFormController implements Controller
 		{
 			mav.setViewName("redirect:logout.action");
 			return mav;
-		}
-		// 세션 처리과정 추가 ----------------------------------------------------------------------
+		}		
+		// 세션 확인 처리 ----------------------------------------
+		
+		// 데이터 수신 → DepartmentList.jsp로부터 departmentId 수신
+		String departmentId = request.getParameter("departmentId");
 		
 		try
 		{
-			Department department = new Department();
+			dao.remove(departmentId);
 			
-			// 데이터 수신 → DepartmentList.jsp로부터 departmentName 수신
-			String departmentId = request.getParameter("departmentId");
-			
-			department = dao.searchId(departmentId);
-			
-			mav.addObject("department", department);
-			mav.setViewName("WEB-INF/views/DepartmentUpdateForm.jsp");
+			mav.setViewName("redirect:departmentlist.action");
 			
 		} catch (Exception e)
 		{

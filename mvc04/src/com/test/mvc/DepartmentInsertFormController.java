@@ -36,7 +36,7 @@ public class DepartmentInsertFormController implements Controller
 		}
 		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		
-		mav.setViewName("/WEB-INF/views/DepartmentInsertForm.jsp");
+		mav.setViewName("WEB-INF/views/DepartmentInsertForm.jsp");
 		
 		return mav;
 	}

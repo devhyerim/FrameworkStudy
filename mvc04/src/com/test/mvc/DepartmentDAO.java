@@ -62,6 +62,36 @@ public class DepartmentDAO implements IDepartmentDAO
 		return result;
 	}
 	
+	
+	// 부서 아이디로 이름 가져오기
+	@Override
+	public Department searchId(String departmentId) throws SQLException
+	{
+		Department dm = new Department();
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT DEPARTMENTID, DEPARTMENTNAME"
+				+ " FROM DEPARTMENT"
+				+ " WHERE DEPARTMENTID = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, departmentId);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next())
+		{			
+			dm.setDepartmentId(rs.getString("DEPARTMENTID"));
+			dm.setDepartmentName(rs.getString("DEPARTMENTNAME"));
+		}
+		
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return dm;
+	}
+
 	// 부서 데이터 등록(입력, 추가)
 	@Override
 	public int add(Department department) throws SQLException

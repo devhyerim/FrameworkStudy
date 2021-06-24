@@ -116,8 +116,8 @@
 	<bean name="/departmentinsertform.action" class="com.test.mvc.DepartmentInsertFormController"></bean>
 	
 	<!-- 14. 부서 등록 액션 처리 DepartmentInsertController 등록 -->
-	<bean name="/departmentinsert.action" class="com.test.mvc.DepartmentInsertController">
-		<property name="dao" ref="departmentDAO"></property>
+	<bean name="/departmentinsert.action" class="com.test.mvc.DepartmentInsertController" >
+		<property name="dao" ref="departmentDAO"/>
 	</bean>
 	
 	<!-- 15. 부서 수정 입력폼 DepartmentUpdateFormController 등록 -->
@@ -130,5 +130,9 @@
 		<property name="dao" ref="departmentDAO"></property>
 	</bean>
 	
+	<!-- 17. 부서 삭제 액션 처리 DepartmentDeleteController 등록 -->
+	<bean name="/departmentdelete.action" class="com.test.mvc.DepartmentDeleteController">
+		<property name="dao" ref="departmentDAO"></property>
+	</bean>
 	
 </beans>
