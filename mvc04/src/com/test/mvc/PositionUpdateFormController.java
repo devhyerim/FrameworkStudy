@@ -1,12 +1,11 @@
 /*==================================
-   DepartmentInsertFormController.java
+   PositionUpdateFormController.java
    - 사용자 정의 컨트롤러 클래스
-   - 부서 입력(등록) 페이지로 이동
+   - 사용자가 직위 수정할 수 있는 화면으로 이동
+   - 저장되어 있는 직위 정보를 가지고 뷰 화면으로 이동
 ===================================*/
 
 package com.test.mvc;
-
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 
-public class DepartmentInsertFormController implements Controller
+public class PositionUpdateFormController implements Controller
 {
-	private IDepartmentDAO dao;
+	private IPositionDAO dao;
 	
-	public void setDao(IDepartmentDAO dao)
+	public void setDao(IPositionDAO dao)
 	{
 		this.dao = dao;
 	}
@@ -45,20 +44,22 @@ public class DepartmentInsertFormController implements Controller
 		}
 		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		
-		ArrayList<Department> departmentList = new ArrayList<Department>();
-		
 		try
 		{
-			departmentList = dao.list();
+			Position position = new Position();
 			
-			mav.addObject("departmentList",departmentList);
+			// 데이터 수신 → PositionList.jsp로부터 PositionId 수신
+			String positionId = request.getParameter("positionId");
 			
-			mav.setViewName("WEB-INF/views/DepartmentInsertForm.jsp");
+			position = dao.searchId(positionId);
+			
+			mav.addObject("position", position);
+			mav.setViewName("WEB-INF/views/PositionUpdateForm.jsp");
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
-		};
+		}
 		
 		return mav;
 	}

@@ -101,7 +101,7 @@ public class DepartmentDAO implements IDepartmentDAO
 		Connection conn = dataSource.getConnection();
 		
 		String sql = "INSERT INTO DEPARTMENT(DEPARTMENTID, DEPARTMENTNAME)" + 
-				" VALUES(DEPARTMENTSEQ.NEXTVAL, ?);";
+				" VALUES(DEPARTMENTSEQ.NEXTVAL, ?)";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, department.getDepartmentName());

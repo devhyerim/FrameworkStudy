@@ -60,6 +60,33 @@ public class RegionDAO implements IRegionDAO
 		return result;
 	}
 
+	// 지역 아이디로 지역명까지 검색
+	@Override
+	public Region searchId(String regionId) throws SQLException
+	{
+		Region result = new Region();
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT REGIONID, REGIONNAME FROM REGION WHERE REGIONID = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, regionId);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next())
+		{	
+			result.setRegionId(rs.getString("REGIONID"));
+			result.setRegionName(rs.getString("REGIONNAME"));
+		}
+		
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
 	@Override
 	public int add(Region region) throws SQLException
 	{

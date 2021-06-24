@@ -62,6 +62,33 @@ public class PositionDAO implements IPositionDAO
 		return result;
 	}
 
+	// 직위 아이디로 직위명까지 검색
+	@Override
+	public Position searchId(String positionId) throws SQLException
+	{
+		Position result = new Position();
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT POSITIONID, POSITIONNAME FROM POSITION WHERE POSITIONID = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, positionId);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next())
+		{	
+			result.setPositionId(rs.getString("POSITIONID"));
+			result.setPositionName(rs.getString("POSITIONNAME"));
+		}
+		
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
 	@Override
 	public int add(Position position) throws SQLException
 	{
@@ -70,7 +97,7 @@ public class PositionDAO implements IPositionDAO
 		Connection conn = dataSource.getConnection();
 		
 		String sql = "INSERT INTO POSITION(POSITIONID, POSITIONNAME, MINBASICPAY)"
-				+ " VALUES(POSITIONSEQ.NEXTVAL, ?, ?);";
+				+ " VALUES(POSITIONSEQ.NEXTVAL, ?, ?)";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, position.getPositionName());

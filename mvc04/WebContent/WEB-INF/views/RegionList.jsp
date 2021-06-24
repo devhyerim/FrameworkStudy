@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DepartmentList.jsp</title>
+<title>RegionList.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/main.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
@@ -18,14 +18,14 @@
 	{
 		$(".updateBtn").click(function()
 		{
-			$(location).attr("href", "departmentupdateform.action?departmentId=" + $(this).val());
+			$(location).attr("href", "regionupdateform.action?regionId=" + $(this).val());
 		});
 		
 		$(".deleteBtn").click(function()
 		{
 			if(confirm("현재 선택한 데이터를 정말 삭제하시겠습니까?"))
 			{
-				$(location).attr("href", "departmentdelete.action?departmentId=" +  $(this).val());
+				$(location).attr("href", "regiondelete.action?regionId=" +  $(this).val());
 			}
 		});
 	});
@@ -35,8 +35,8 @@
 </head>
 <body>
 <!------------------------------------------------
-   DepartmentList.jsp
-   → 부서 리스트 출력 페이지 (관리자)
+   RegionList.jsp
+   → 지역 리스트 출력 페이지 (관리자)
 --------------------------------------------------->
 
 <div>
@@ -48,38 +48,35 @@
 	<!-- 콘텐츠 영역 -->
 	<div id="content">
 		
-		<h1>[ 부서 관리 (관리자 전용) ]</h1>
+		<h1>[ 지역 관리 (관리자 전용) ]</h1>
 		<hr>
 		
 		<div>
 			<form action="">
-				<input type="button" value="부서 추가" class="btn"
-				onclick="location.href='departmentinsertform.action'">
+				<input type="button" value="지역 추가" class="btn"
+				onclick="location.href='regioninsertform.action'">
 			</form>
 		</div>
 		<br><br>
-		
-		<!-- 
-		DEPARTMENTID, DEPARTMENTNAME, DELCHECK(부서 인원수)
-		-->
-		<table id="departments" class="table">
+	
+		<table id="regions" class="table">
 			<tr>
-				<th>부서아이디</th>
-				<th>부서명</th>
-				<th>부서 인원 수</th>
+				<th>지역아이디</th>
+				<th>지역명</th>
+				<th>지역 인원 수</th>
 				<th>수정</th>
 				<th>삭제</th>
 			</tr>
-			<c:forEach var="dm" items="${departmentList }">
+			<c:forEach var="region" items="${regionList }">
 			<tr>
-				<td>${dm.departmentId }</td>
-				<td>${dm.departmentName }</td>
-				<td>${dm.delCheck }명</td>
+				<td>${region.regionId }</td>
+				<td>${region.regionName }</td>
+				<td>${region.delCheck }명</td>
 				<td><button type="button" class="updateBtn"
-				value="${dm.departmentId }">수정</button></td>
+				value="${region.regionId }">수정</button></td>
 				<td><button type="button" class="deleteBtn"
-				value="${dm.departmentId }"
-				${dm.delCheck==0 ? "" : "disabled=\"disabled\"" }>삭제</button></td>
+				value="${region.regionId }"
+				${region.delCheck==0 ? "" : "disabled=\"disabled\"" }>삭제</button></td>
 			</tr>
 			</c:forEach>
 		</table>

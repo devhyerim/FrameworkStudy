@@ -1,7 +1,7 @@
 /*==================================
-   DepartmentInsertFormController.java
+   PositionListController.java
    - 사용자 정의 컨트롤러 클래스
-   - 부서 입력(등록) 페이지로 이동
+   - 직위 출력
 ===================================*/
 
 package com.test.mvc;
@@ -16,24 +16,24 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 
-public class DepartmentInsertFormController implements Controller
+public class PositionListController implements Controller
 {
-	private IDepartmentDAO dao;
+	private IPositionDAO dao;
 	
-	public void setDao(IDepartmentDAO dao)
+	public void setDao(IPositionDAO dao)
 	{
 		this.dao = dao;
 	}
-	
+
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		ModelAndView mav = new ModelAndView();
 		
-		// 세션 처리과정 추가 (관리자만 접근) -----------------------------------------------------
+		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("name")==null)
+		if(session.getAttribute("name")==null) 
 		{
 			mav.setViewName("redirect:loginform.action");
 			return mav;
@@ -45,20 +45,19 @@ public class DepartmentInsertFormController implements Controller
 		}
 		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		
-		ArrayList<Department> departmentList = new ArrayList<Department>();
+		ArrayList<Position> positionList = new ArrayList<Position>();
 		
 		try
 		{
-			departmentList = dao.list();
+			positionList = dao.list();
 			
-			mav.addObject("departmentList",departmentList);
-			
-			mav.setViewName("WEB-INF/views/DepartmentInsertForm.jsp");
+			mav.addObject("positionList", positionList);
+			mav.setViewName("/WEB-INF/views/PositionList.jsp");
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
-		};
+		}
 		
 		return mav;
 	}

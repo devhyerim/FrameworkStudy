@@ -1,7 +1,7 @@
 /*==================================
-   DepartmentInsertFormController.java
+   RegionInsertFormController.java
    - 사용자 정의 컨트롤러 클래스
-   - 부서 입력(등록) 페이지로 이동
+   - 지역 입력(등록) 페이지로 이동
 ===================================*/
 
 package com.test.mvc;
@@ -16,11 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 
-public class DepartmentInsertFormController implements Controller
+public class RegionInsertFormController implements Controller
 {
-	private IDepartmentDAO dao;
+	private IRegionDAO dao;
 	
-	public void setDao(IDepartmentDAO dao)
+	public void setDao(IRegionDAO dao)
 	{
 		this.dao = dao;
 	}
@@ -45,20 +45,20 @@ public class DepartmentInsertFormController implements Controller
 		}
 		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		
-		ArrayList<Department> departmentList = new ArrayList<Department>();
+		ArrayList<Region> regionList = new ArrayList<Region>();
 		
 		try
 		{
-			departmentList = dao.list();
+			regionList = dao.list();
 			
-			mav.addObject("departmentList",departmentList);
+			mav.addObject("regionList", regionList);
 			
-			mav.setViewName("WEB-INF/views/DepartmentInsertForm.jsp");
+			mav.setViewName("WEB-INF/views/RegionInsertForm.jsp");
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
-		};
+		}
 		
 		return mav;
 	}
