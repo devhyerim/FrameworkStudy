@@ -1,6 +1,8 @@
 /*==================================
-   EmployeeInsertFormController.java
+   DepartmentUpdateFormController.java
    - 사용자 정의 컨트롤러 클래스
+   - 사용자가 부서를 수정할 수 있는 화면으로 이동
+   - 저장되어 있는 부서 정보를 가지고 뷰 화면으로 이동
 ===================================*/
 
 package com.test.mvc;
@@ -14,27 +16,24 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-// ※ Spring 의 'Controller' 인터페이스를 구현하는 방법을 통해
-//    사용자 정의 컨트롤러 클래스를 구현한다.
 
-public class EmployeeInsertFormController implements Controller
+public class DepartmentUpdateFormController implements Controller
 {
-	private IEmployeeDAO dao;
+	private IDepartmentDAO dao;
 	
-	//setter
-	public void setDao(IEmployeeDAO dao)
+	public void setDao(IDepartmentDAO dao)
 	{
 		this.dao = dao;
 	}
 	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
-	{	
+	{
 		ModelAndView mav = new ModelAndView();
 		
-        // 세션 확인 처리 ----------------------------------------
+		// 세션 처리과정 추가 (관리자만 접근) -----------------------------------------------------
 		HttpSession session = request.getSession();
-				
+		
 		if(session.getAttribute("name")==null)
 		{
 			mav.setViewName("redirect:loginform.action");
@@ -44,24 +43,17 @@ public class EmployeeInsertFormController implements Controller
 		{
 			mav.setViewName("redirect:logout.action");
 			return mav;
-		}	
-		// 세션 확인 처리 ----------------------------------------
+		}
+		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		
-		ArrayList<Region> regionList = new ArrayList<Region>();
-		ArrayList<Department> departmentList = new ArrayList<Department>();
-		ArrayList<Position> positionList = new ArrayList<Position>();
+		ArrayList<Department> department = new ArrayList<Department>();
 		
 		try
 		{
-			regionList = dao.regionList();
-			departmentList = dao.departmentList();
-			positionList = dao.positionList();
+			department = dao.list();
 			
-			mav.addObject("regionList", regionList);
-			mav.addObject("departmentList", departmentList);
-			mav.addObject("positionList", positionList);
-			
-			mav.setViewName("WEB-INF/views/EmployeeInsertForm.jsp");
+			mav.addObject("department", department);
+			mav.setViewName("WEB-INF/view/DepartmentUpdateForm.jsp");
 			
 		} catch (Exception e)
 		{

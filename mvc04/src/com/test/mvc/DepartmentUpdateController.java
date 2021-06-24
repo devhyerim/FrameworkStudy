@@ -1,7 +1,7 @@
 /*==================================
-   EmployeeDeleteController.java
+   DepartmentUpdateController.java
    - 사용자 정의 컨트롤러 클래스
-   - 직원 데이터 삭제 처리 후 리다이렉트
+   - 부서 수정 액션 처리
 ===================================*/
 
 package com.test.mvc;
@@ -13,27 +13,23 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-// ※ Spring 의 'Controller' 인터페이스를 구현하는 방법을 통해
-//    사용자 정의 컨트롤러 클래스를 구현한다.
-
-public class EmployeeDeleteController implements Controller
+public class DepartmentUpdateController implements Controller
 {
-	private IEmployeeDAO dao;
+	private IDepartmentDAO dao;
 	
-	public void setDao(IEmployeeDAO dao)
+	public void setDao(IDepartmentDAO dao)
 	{
 		this.dao = dao;
 	}
-
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		ModelAndView mav = new ModelAndView();
 		
-		// 세션 확인 처리 ----------------------------------------
-		
+		// 세션 처리과정 추가 (관리자만 접근) -----------------------------------------------------
 		HttpSession session = request.getSession();
-				
+		
 		if(session.getAttribute("name")==null)
 		{
 			mav.setViewName("redirect:loginform.action");
@@ -44,17 +40,18 @@ public class EmployeeDeleteController implements Controller
 			mav.setViewName("redirect:logout.action");
 			return mav;
 		}
-				
-		// 세션 확인 처리 ----------------------------------------
+		// 세션 처리과정 추가 ----------------------------------------------------------------------
 		
-		// 데이터 수신 → EmployeeList.jsp로부터 employeeId 수신
-		String employeeId = request.getParameter("employeeId");
+		String departmentName = request.getParameter("departmentName");
 		
 		try
 		{
-			dao.remove(employeeId);
+			Department department = new Department();
+			department.setDepartmentName(departmentName);
 			
-			mav.setViewName("redirect:employeelist.action");
+			dao.modify(department);
+			
+			mav.setViewName("redirect:departmentlist.action");
 			
 		} catch (Exception e)
 		{

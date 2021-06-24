@@ -54,7 +54,7 @@
 		<property name="dataSource" ref="localDataSource"></property>
 	</bean>
 	
-	<!-- 3. Employee 관련 Controller 등록 -->
+	<!-- 3. 관리자의 Employee 조회 관련 Controller 등록 -->
 	<bean name="/employeelist.action" class="com.test.mvc.EmployeeListController">
 		<property name="dao" ref="employeeDAO"></property>
 	</bean>
@@ -91,5 +91,44 @@
 	<bean name="/employeedelete.action" class="com.test.mvc.EmployeeDeleteController">
 		<property name="dao" ref="employeeDAO"></property>
 	</bean>
+	
+	<!-- 10. Login 및 Logout 관련 Controller 등록 -->
+	<bean name="/loginform.action" class="com.test.mvc.LoginFormController"></bean>
+	
+	<bean name="/login.action" class="com.test.mvc.LoginController">
+		<property name="dao" ref="employeeDAO"></property>
+	</bean>
+	
+	<bean name="/logout.action" class="com.test.mvc.LogoutController">
+	</bean>
+	
+	<!-- 11. 일반 직원들의 직원 조회 EmpListController 등록  -->
+	<bean name="/emplist.action" class="com.test.mvc.EmpListController">
+		<property name="dao" ref="employeeDAO"></property>
+	</bean>
+	
+	<!-- 12. 부서 조회 DepartmentListController 등록 -->
+	<bean name="/departmentlist.action" class="com.test.mvc.DepartmentListController">
+		<property name="dao" ref="departmentDAO"></property>
+	</bean>
+	
+	<!-- 13. 부서 등록(입력) DepartmentInsertFormController 등록 -->
+	<bean name="/departmentinsertform.action" class="com.test.mvc.DepartmentInsertFormController"></bean>
+	
+	<!-- 14. 부서 등록 액션 처리 DepartmentInsertController 등록 -->
+	<bean name="/departmentinsert.action" class="com.test.mvc.DepartmentInsertController">
+		<property name="dao" ref="departmentDAO"></property>
+	</bean>
+	
+	<!-- 15. 부서 수정 입력폼 DepartmentUpdateFormController 등록 -->
+	<bean name="/departmentupdateform.action" class="com.test.mvc.DepartmentUpdateFormController">
+		<property name="dao" ref="departmentDAO"></property>
+	</bean>
+	
+	<!-- 16. 부서 수정 액션 처리 DepartmentUpdateController 등록 -->
+	<bean name="/departmentupdate.action" class="com.test.mvc.DepartmentUpdateController">
+		<property name="dao" ref="departmentDAO"></property>
+	</bean>
+	
 	
 </beans>

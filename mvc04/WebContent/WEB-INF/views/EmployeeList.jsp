@@ -11,7 +11,6 @@
 <meta charset="UTF-8">
 <title>EmployeeList.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/main.css" />
-
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -61,7 +60,7 @@
 	<!-- 콘텐츠 영역 -->
 	<div id="content">
 		
-		<h1>[ 직원 관리 ]</h1>
+		<h1>[ 직원 관리 (관리자 전용) ]</h1>
 		<hr>
 		
 		<div>
