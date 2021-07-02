@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BootEx03.html</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<style type="text/css">
+	/* 테이블 기본 서식*/
+	#table
+	{
+		width: 500px;
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	#table td
+	{	
+		border: 1px solid black;
+	}
+	#table1
+	{
+		width: 720px;
+	}
+   #table1 th{text-align: center;}
+   #table1 th:nth-child(1){width: 60px;}
+   #table1 th:nth-child(2){width: 450px;}
+   #table1 th:nth-child(3){width: 60px;}
+   #table1 th:nth-child(4){width: 100px;}
+   #table1 th:nth-child(5){width: 50px;}
+   
+   #table1 td{text-align: center;}
+   #table1 td:nth-child(2){text-align: left; padding-left:20px;}
+   #table1 td:nth-child(5){text-align: right;}
+   
+   #btnSet
+   {
+   		margint-top: -10px;
+   }
+   
+   #main
+   {
+   		width: 700px;
+   		margin: 0px auto;
+   }
+   #tblAdd {width:600px;}
+   #tblAdd th {}
+   #tblAdd td {}
+   
+</style>
+</head>
+<body>
+
+<h1>회원 가입</h1>
+
+<form action="" style="width: 500px; margin: 20px;">
+
+	<input type="text" class="form-control">
+	<br>
+	<textarea rows="" cols="" class="form-control"></textarea>
+	<br>
+	
+	<select class="" class="form-control">
+		<option>Test1</option>
+		<option>Test2</option>
+		<option>Test3</option>
+		<option>Test4</option>
+	</select>
+	<br>
+	
+	<input type="checkbox" class="form-control">
+	<br>
+	<input type="checkbox">
+	<br>
+	<input type="checkbox" class="form-control" style="width:10px;">
+	<br><br><br>
+	<!-- form-control 클래스 적용하면 파란색 인풋박스 적용됨 -->
+	<a href="#" class="form-control" >네이버</a>
+	<a href="#" class="form-control" >다음</a>
+	<a href="#">네이버</a>
+	<br><br>
+	<input type="button" value="confirm">
+	<input type="button" value="confirm" class="btn">
+	<input type="button" value="confirm" class="btn btn-default">
+	<br><br>
+	<input type="button" value="confirm" class="btn btn-default">
+	<input type="button" value="confirm" class="btn btn-success">
+	<input type="button" value="confirm" class="btn btn-primary">
+	<input type="button" value="confirm" class="btn btn-info">
+	<input type="button" value="confirm" class="btn btn-warning">	
+	<input type="button" value="confirm" class="btn btn-danger">
+	<br><br>
+	<input type="button" value="confirm" class="btn btn-primary btn-block">
+	<br><br>
+	<input type="button" value="confirm" class="btn btn-default">
+	<input type="button" value="confirm" class="btn btn-default active">
+	<br><br>
+	<a href="#" class="btn btn-primary" role="button">다음</a>
+</form>
+
+<br><br>
+
+<div id="main">
+	<h1>게시판</h1>
+	<table class="table table-striped" id="table1">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>이름</th>
+			<th>날짜</th>
+			<th>읽음</th>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>게시판 테스트입니다.</td>
+			<td>이유림</td>
+			<td>2021-07-02</td>
+			<td>22</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>게시판 테스트입니다.</td>
+			<td>박민지</td>
+			<td>2021-07-02</td>
+			<td>31</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>게시판 테스트이기를</td>
+			<td>박정준</td>
+			<td>2021-07-02</td>
+			<td>37</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>게시판 테스트인가요</td>
+			<td>조은선</td>
+			<td>2021-07-01</td>
+			<td>41</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>게시판 테스트인가요</td>
+			<td>한혜림</td>
+			<td>2021-07-01</td>
+			<td>22</td>
+		</tr>
+	</table>
+	
+	<div id="btnSet">
+		<input type="button" value="글쓰기" class="btn btn-default" />
+		<input type="button" value="새로고침" class="btn btn-default" />
+	</div>
+</div>
+
+
+<div id="main">
+
+	<h1>게시판 글쓰기</h1>
+	
+	<form action="">
+		<table class="table table-bordered" id="tblAdd">
+			<tr>
+				<th>이름</th>
+				<td>
+					<input type="text" class="form-control" placeholder="이름을 입력하세요."/>
+				</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>
+					<input type="text" class="form-control" placeholder="제목을 입력하세요."/>
+				</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+					<input type="text" class="form-control" placeholder="내용을 입력하세요."/>
+				</td>
+			</tr>
+			<tr>
+				<th>암호</th>
+				<td>
+					<input type="password" class="form-control" placeholder="암호를 입력하세요."/>
+				</td>
+			</tr>
+			<tr>
+				<th>파일</th>
+				<td>
+					<input type="file" class="form-control" placeholder="파일을 입력하세요."/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>
