@@ -59,7 +59,7 @@
 			</div><!-- close .panel-heading .row -->
 			
 			<div class="panel-body">
-				전체 학생 수 <span class="badge">4</span>
+				전체 학생 수 <span class="badge">${count }</span>
 			</div>
 			
 			<div class="panel-body">
@@ -75,6 +75,7 @@
 					</thead>
 					
 					<tbody>
+					<!-- 	
 						<tr>
 							<td>4</td>
 							<td>심혜진</td>
@@ -95,6 +96,26 @@
 								<button type="button" class="btn btn-danger">삭제</button>
 							</td>
 						</tr>
+					-->
+						<c:forEach var="student" items="${list }">
+						<tr>
+							<td>${student.sid }</td>
+							<td>${student.name }</td>
+							<td>${student.tel }</td>
+							<c:if test="${student.sub==0 }">
+							<td> X </td>
+							</c:if>
+							<c:if test="${student.sub==1 }">
+							<td> O </td>
+							</c:if>
+							<td>
+								<button type="button" class="btn btn-success">수정</button>
+								<button type="button" class="btn btn-danger">삭제</button>
+							</td>
+						</tr>
+						</c:forEach>
+						
+						
 					</tbody>
 				</table>
 			</div>
