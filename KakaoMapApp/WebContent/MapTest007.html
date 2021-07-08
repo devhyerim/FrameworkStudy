@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MapTest007.html</title>
+
+<!-- ○ 발급받은 App Key -->
+<!-- 2fd49a69d964ea8c3cd915a2258f820e -->
+<!-- ○ 지도의 중심 좌표 -->
+<!-- 37.556556, 126.919521 -->
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2fd49a69d964ea8c3cd915a2258f820e"></script>
+
+<script type="text/javascript">
+
+   function initialize()
+   {
+      container = document.getElementById("map");      //-- 지도를 표시할 div
+      options = 
+      {
+         center: new kakao.maps.LatLng(37.556556, 126.919521)   //-- 지도의 중심좌표
+         , level:3
+      }
+   
+      // 지도를 그릴 대상 div 와 옵션을 넘겨주며 지도 생성
+      map = new kakao.maps.Map(container, options);
+      
+      // 지도 타입 컨트롤 생성
+      //-- 일반 지도와 스카이 뷰로 타입 전환
+      mapTypeControl = new kakao.maps.MapTypeControl();
+      
+      // * 지도에 컨트롤을 추가해야 지도 위에 표시된다.
+      //   'kakao.maps.ControlPosition' 은 컨트롤이 표시될 위치를 정의하며,
+      //   'TOPRIGHT'는 오른쪽 위를 의미한다.
+      
+      // 위에서 생성한 지도 타입 컨트롤을 지도 위에 올리기(즉, 지도 위에 표시하기)
+      map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+      //-- TOP: 위 가운데를 의미한다. 아래로 쌓인다.
+      //-- TOPLEFT: 왼쪽 위를 의미한다. 오른쪽으로 쌓인다.
+      //-- TOPRIGHT: 오른쪽 위를 의미한다. 왼쪽으로 쌓인다.
+      //-- LEFT: 왼쪽 위를 의미한다. 아래로 쌓인다. (주의. 왼쪽 중앙을 의미X)
+      //-- RIGHT: 오른쪽 위를 의미한다. 아래로 쌓인다. (주의. 오른쪽 중앙을 의미하는 것이 아니다.)
+   	  //-- BOTTOMLEFT: 왼쪽 아래를 의미한다. 오른쪽으로 쌓인다.
+   	  //-- BOTTOM: 아래 가운데를 의미한다. 위로 쌓인다.
+   	  //-- BOTTOMRIGHT: 오른쪽 아래를 의미한다. 왼쪽으로 쌓인다.
+      
+   	  // 줌 컨트롤 생성(확대 축소 제어)
+      zoomControl = new kakao.maps.ZoomControl();
+   	  
+   	  // 위에서 생성한 줌 컨트롤을 지도에 표시
+   	  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+ 
+   }
+</script>
+
+</head>
+<body onload="initialize()">
+
+<div>
+   <h1>Kakao Map 기본 컨트롤 구성</h1>
+   <hr>
+</div>
+
+<!-- 지도를 그릴 div 공간 확보(지정) -->
+<div id="map" style="width: 100%; height: 350px;"></div>
+
+<br>
+
+
+</body>
+</html>
